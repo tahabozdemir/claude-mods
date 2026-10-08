@@ -1,0 +1,12 @@
+{
+  "name": "claude-mods",
+  "description": "Mods for Claude Code, written as plugins of function hooks.",
+  "owner": { "name": "Taha Bozdemir" },
+  "plugins": [
+    {
+      "name": "usage-band",
+      "source": "./mods/usage-band",
+      "description": "A row of pills above the prompt: rate limits with pace, context, tokens and cost."
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "usage-band",
+  "version": "0.1.0",
+  "description": "A row of pills above the prompt: rate limits with pace, context, tokens and cost.",
+  "author": {
+    "name": "Taha Bozdemir"
+  },
+  "types": "./types/index.d.ts",
+  "userConfig": {
+    "desktopCellPx": {
+      "type": "number",
+      "title": "Desktop cell width (px)",
+      "description": "CSS pixels per column of the desktop app's code font, used to fit the band. The default (7.2, a 12px font) never overflows; raise it if the desktop band drops pills it has room for.",
+      "default": 7.2
+    }
+  }
+}

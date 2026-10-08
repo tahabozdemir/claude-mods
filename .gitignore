@@ -1,0 +1,4 @@
+.DS_Store
+
+# Type definitions Claude Code writes into a mod when it loads one
+.claude-plugin/types/
