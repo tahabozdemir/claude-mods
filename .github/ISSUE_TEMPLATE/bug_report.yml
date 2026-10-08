@@ -1,0 +1,48 @@
+name: Bug report
+description: A mod does something wrong or doesn't load.
+labels: [bug]
+body:
+  - type: dropdown
+    id: mod
+    attributes:
+      label: Mod
+      options:
+        - usage-band
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What you did, what you expected, and what happened instead. A screenshot helps.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Claude Code version
+      description: The output of `claude --version`.
+    validations:
+      required: true
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Where
+      options:
+        - Terminal
+        - Desktop app
+        - VS Code
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Operating system
+      placeholder: macOS 27, Ubuntu 24.04, Windows 11…
+  - type: textarea
+    id: logs
+    attributes:
+      label: Debug log
+      description: Start Claude Code with `claude --debug` and paste the lines that begin with the mod's name.
+      render: text

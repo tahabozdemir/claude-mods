@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Validate and test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install Claude Code
+        run: |
+          curl -fsSL https://claude.ai/install.sh | bash
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Validate the marketplace
+        run: claude plugin validate .
+
+      - name: Validate and test each mod
+        run: |
+          for mod in mods/*/; do
+            echo "::group::${mod}"
+            claude plugin validate "$mod"
+            claude plugin test "$mod"
+            echo "::endgroup::"
+          done

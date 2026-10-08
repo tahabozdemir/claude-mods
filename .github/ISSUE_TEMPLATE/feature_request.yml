@@ -1,0 +1,18 @@
+name: Idea
+description: Suggest a change to a mod, or a new mod.
+labels: [enhancement]
+body:
+  - type: input
+    id: mod
+    attributes:
+      label: Mod
+      description: Which mod this is about, or "new" for a new one.
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: The idea
+      description: What should it do, and what problem does that solve for you?
+    validations:
+      required: true

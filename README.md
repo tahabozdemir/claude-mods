@@ -1,68 +1,61 @@
 # claude-mods
 
-Mods for [Claude Code](https://claude.com/claude-code), written as plugins of function hooks. This repository is a plugin marketplace: each mod installs with one line.
+[![CI](https://github.com/tahabozdemir/claude-mods/actions/workflows/ci.yml/badge.svg)](https://github.com/tahabozdemir/claude-mods/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+Small mods for [Claude Code](https://claude.com/claude-code). Each one is a plugin you install with a single command, and it works in the terminal and in the desktop app.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/images/hero-dark.png">
+  <img alt="Claude Code in a terminal with the usage band above the prompt: 5-hour limit at 40% in yellow, 7-day limit at 58%, context at 62%, and token counts" src="docs/images/hero-light.png">
+</picture>
+
+## Mods
 
 | Mod | What it does |
 | --- | --- |
-| [usage-band](mods/usage-band) | A row of pills above the prompt: 5-hour and 7-day rate limits with pace, context, tokens and cost. |
+| [**usage-band**](mods/usage-band) | Shows your rate limits, context and token use in a row above the prompt, and turns yellow before you run out. |
 
 ## Install
 
-Type this at the prompt of a Claude Code terminal session:
+You need Claude Code in a terminal. Installing takes three steps:
 
-```
-/plugin install usage-band --marketplace tahabozdemir/claude-mods
-```
+1. Start Claude Code with `claude`.
+2. Paste this line at the prompt and press Enter:
 
-Answer `y` to add the marketplace, then press Enter to pick the user scope. The mod is active right away, and in every session after that, including the desktop app's Code tab.
+   ```
+   /plugin install usage-band --marketplace tahabozdemir/claude-mods
+   ```
 
-## usage-band
+3. Answer the questions it asks:
+   - **Add marketplace?** Type `y`.
+   - **Scope:** press Enter to install it for yourself in every project.
+   - **Options:** press Enter to keep the defaults.
 
-![usage-band in the dark theme](assets/usage-band-dark.png)
+That's it. The band shows up above the prompt after your first message.
 
-A band above the prompt that shows, left to right:
+> [!TIP]
+> Using the Claude desktop app? Install once from a terminal as above. The mod then shows in the desktop app's Code tab too.
 
-- **5h / 7d**: how much of each rate-limit window is used, a tick for how much of the window has passed, and when it resets. A pill turns yellow when your pace would hit the limit before the reset, and red with `⚠` when you are at 90% or about to run out.
-- **ctx**: how full the context window is (yellow from 70%, red from 90%).
-- **↑ ↓**: input and output tokens for the session, subagents included.
-- **≈$**: session cost at API list prices. Hidden by default on a subscription.
-
-The rate-limit pills appear only on a subscription plan, since only subscriptions report those windows. On a narrow window the band drops tokens, then cost, then 7d, and then draws 5h and ctx more compactly. It never wraps.
-
-### Commands
-
-| Command | Effect |
-| --- | --- |
-| `/usage-pill` | Refresh now and print a one-line summary |
-| `/usage-pill hide` / `show` | Hide or show the band |
-| `/usage-pill cost on` / `off` / `auto` | Show the cost pill, hide it, or hide it only on a subscription (the default) |
-
-### Options
-
-- **Desktop cell width (px)** (`desktopCellPx`, default `7.2`): CSS pixels per column of the desktop app's code font, used to fit the band. Raise it if the desktop band drops pills it has room for.
-
-### Requirements
-
-Exact token counts come from the session transcripts, read by `scripts/tokens.mjs` with Node.js (`node` on `PATH`, `/usr/local/bin/node` or `/opt/homebrew/bin/node`). Without Node the band falls back to summing each turn's usage and marks the numbers with `~`.
-
-## Development
-
-Run a mod straight from this folder:
+### Update
 
 ```sh
-claude --plugin-dir ./mods/usage-band
+claude plugin marketplace update claude-mods
+claude plugin update usage-band@claude-mods
 ```
 
-Saving a file reloads the mod in the running session. Check and test it with:
+Restart Claude Code to load the new version.
+
+### Uninstall
 
 ```sh
-claude plugin validate .                    # the marketplace file
-claude plugin validate mods/usage-band      # the manifest and the hooks module
-claude plugin test mods/usage-band          # the *.test.ts files
+claude plugin uninstall usage-band@claude-mods
 ```
 
-Once the mod has loaded, Claude Code writes its type definitions to `mods/usage-band/.claude-plugin/types/` (git-ignored), and `tsc -p mods/usage-band` type-checks it.
+## Contributing
+
+Bug reports, ideas and pull requests are welcome. [CONTRIBUTING.md](CONTRIBUTING.md) covers running a mod from source, testing it, and adding a new one. To report a security issue, see [SECURITY.md](SECURITY.md).
 
 ## License
 
-[MIT](LICENSE)
+[MIT](LICENSE) © Taha Bozdemir

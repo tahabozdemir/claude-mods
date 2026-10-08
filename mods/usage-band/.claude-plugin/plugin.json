@@ -5,6 +5,17 @@
   "author": {
     "name": "Taha Bozdemir"
   },
+  "homepage": "https://github.com/tahabozdemir/claude-mods/tree/main/mods/usage-band",
+  "repository": "https://github.com/tahabozdemir/claude-mods",
+  "license": "MIT",
+  "keywords": [
+    "usage",
+    "rate-limits",
+    "context",
+    "tokens",
+    "cost",
+    "statusline"
+  ],
   "types": "./types/index.d.ts",
   "userConfig": {
     "desktopCellPx": {
